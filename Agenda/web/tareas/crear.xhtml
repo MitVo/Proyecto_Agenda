@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../layouts/global.xhtml">
+
+            <ui:insert name="top"></ui:insert>
+
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="msg" showDetail="true"/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Persona: " for="dd" />
+                        
+                        <p:autoComplete  id="dd"    
+                                         value="#{tareaBean.persona}"
+                                         completeMethod="#{tareaBean.complete}"
+                                         var="persona"
+                                         itemValue="#{tareaBean.convertInt(persona.personaId)}"
+                                         itemLabel="#{persona.nombre.concat(' ').concat(persona.apellido)}"
+                                         forceSelection="true">
+                        </p:autoComplete>
+                        <p:outputLabel value="Proyecto: " for="pro" />
+                        <p:autoComplete  id="pro"    
+                                         value="#{tareaBean.proyecto}"
+                                         completeMethod="#{tareaBean.completePro}"
+                                         var="proyecto"
+                                         itemValue="#{tareaBean.convertInt(proyecto.proyectoId)}"
+                                         itemLabel="#{proyecto.nombre}"
+                                         forceSelection="true">
+                        </p:autoComplete>
+                        
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../layouts/global.xhtml">
+
+            <ui:insert name="top">
+            </ui:insert>
+
+            <ui:define name="content">
+                    <h1>Crear Proyecto</h1>
+                <h:form>
+                 <h:panelGrid id="panel1" columns="3">
+                     <p:growl id="grow1" showDetail="true"/>
+                    <h:outputLabel for="nombre"  value="Nombre: "/>
+                    <h:inputText id="nombre" label="Nombre" required="true" value="#{proyectoBean.proyecto.nombre}"/>
+                    <h:message for="nombre"/>
+                    
+                    <h:outputLabel for="descripcion" value="Descripción: "/>
+                    <h:inputTextarea id="descripcion" rows="10" cols="20" label="Descripción: " required="true" value="#{proyectoBean.proyecto.descripcion}"/>
+                    <h:message for="descripcion"/>
+                    
+                    <p:commandButton id="btnCrear" value="Enviar" actionListener="#{proyectoBean.guardar}" update="grow1" ajax="true"/>
+                 </h:panelGrid>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

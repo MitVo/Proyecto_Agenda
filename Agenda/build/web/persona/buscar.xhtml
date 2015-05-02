@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../layouts/global.xhtml">
+
+            <ui:insert name="top">
+            </ui:insert>
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <p:growl id="grow1" showDetail="true"/>
+                    <p:dataTable id="dtPersona" var="persona" value="#{personaBean.LPersona}" rows="10"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{persona.personaId}" />
+                        </p:column>
+
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{persona.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Apellido">
+                            <h:outputText value="#{persona.apellido}" />
+                        </p:column>
+
+                        <p:column headerText="Correo">
+                            <h:outputText value="#{persona.mail}" />
+                        </p:column>
+                        <p:column style="width: 32px;text-align: center">
+                            <p:commandButton update=":frmEditar:PersonaDetail" oncomplete="PF('PersonaDialog').show()" icon="ui-icon-pencil" title="view">
+                                <f:setPropertyActionListener value="#{persona}" target="#{personaBean.persona}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>            
+                <p:dialog header="Información Persona" widgetVar="PersonaDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                   <h:form id="frmEditar">
+                       <p:outputPanel id="PersonaDetail" style="text-align: center">
+                        
+                            <p:panelGrid columns="3" rendered="#{not empty personaBean.persona}" columnClasses="label,value">
+
+                                <h:outputLabel for="nombre" value="Nombre: "/>
+                                <h:inputText id="nombre" label="Nombre" required="true" value="#{personaBean.persona.nombre}"/>
+                                <h:message for="nombre"/>
+
+                                <h:outputLabel for="apellido" value="Apellidos: "/>
+                                <h:inputText id="apellido" label="Apellidos: " required="true" value="#{personaBean.persona.apellido}"/>
+                                <h:message for="apellido"/>
+
+                                <h:outputLabel for="mail" value="Correo: "/>
+                                <h:inputText id="mail" label="Correo: " required="true" value="#{personaBean.persona.mail}"/>
+                                <h:message for="mail"/>
+                                <p:commandButton id="btnCrear" value="Enviar" actionListener="#{personaBean.actualizar()}" update=":form:grow1 :form:dtPersona" ajax="true" oncomplete="PF('PersonaDialog').hide()"/>
+
+                            </p:panelGrid>
+                    </p:outputPanel>
+                   </h:form>
+                </p:dialog>
+
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

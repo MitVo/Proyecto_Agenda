@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-abr-2015 21:47:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.agenda.model.Notificacion" table="notificacion" catalog="agenda" optimistic-lock="version">
+        <id name="notificacionId" type="int">
+            <column name="notificacion_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tarea" class="com.agenda.model.Tarea" fetch="select">
+            <column name="tarea_tarea_id" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

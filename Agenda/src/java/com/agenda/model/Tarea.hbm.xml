@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-abr-2015 21:47:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.agenda.model.Tarea" table="tarea" catalog="agenda" optimistic-lock="version">
+        <id name="tareaId" type="java.lang.Integer">
+            <column name="tarea_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="com.agenda.model.Persona" fetch="select">
+            <column name="persona_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="proyecto" class="com.agenda.model.Proyecto" fetch="select">
+            <column name="proyecto_id" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="65" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="16777215" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="ejecucion" type="int">
+            <column name="ejecucion" not-null="true" />
+        </property>
+        <property name="estadoTarea" type="boolean">
+            <column name="estado_tarea" not-null="true" />
+        </property>
+        <set name="notificacions" table="notificacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tarea_tarea_id" not-null="true" />
+            </key>
+            <one-to-many class="com.agenda.model.Notificacion" />
+        </set>
+    </class>
+</hibernate-mapping>
