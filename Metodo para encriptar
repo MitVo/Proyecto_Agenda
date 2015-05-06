@@ -1,0 +1,53 @@
+public static String Encriptar(String clear) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] b = md.digest(clear.getBytes());
+
+        int size = b.length;
+        StringBuffer h = new StringBuffer(size);
+        for (int i = 0; i < size; i++) {
+            int u = b[i] & 255;
+            if (u < 16) {
+                h.append("0" + Integer.toHexString(u));
+            } else {
+                h.append(Integer.toHexString(u));
+            }
+        }
+        return h.toString();
+    }
+    
+     public static boolean ValidarContraseña(String codigo, String pass) {
+        boolean r = false;
+        int c=0;
+        String passencripted = "";
+        passencripted = encripted(pass);
+        String q = "SELECT *  FROM PASSWORDS WHERE CODUSUARIO='" + codigo + "' and PASSWORD='" + passencripted + "' AND MARCA='A'";
+        ServicioBD.query1 = q;
+        r = ServicioBD.ejecuteQuery();        
+          if (ServicioBD.ejecuteQuery()) {
+            try {
+                while (ServicioBD.rs1.next()) {
+                    c++;
+                }
+            } catch (Exception e) {
+//                System.out.println("FALLO ELCOTEO EN BUSCAR2" + e);
+            }
+        }
+        if(c>0){
+            r=true;
+        }else{
+            r=false;
+        }
+        
+        return r;
+    }
+    
+    
+     public static String encripted(String e) {
+        String s = "";
+        try {
+            s = Encriptar(e);
+        } catch (Exception ex) {
+            System.out.println("error de encriptacion");
+        }
+        return s;
+    }
