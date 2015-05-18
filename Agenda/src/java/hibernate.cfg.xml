@@ -9,7 +9,7 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hibernate.connection.password"></property>
+    <property name="hibernate.connection.password">root</property>
     <mapping resource="com/agenda/model/Persona.hbm.xml"/>
     <mapping resource="com/agenda/model/Proyecto.hbm.xml"/>
     <mapping resource="com/agenda/model/Notificacion.hbm.xml"/>

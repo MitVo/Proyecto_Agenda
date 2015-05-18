@@ -27,11 +27,26 @@ public class Persona  implements java.io.Serializable {
      private String nombre;
      private String apellido;
      private String mail;
+     private Integer user = 0;
+     private String login;
+     private String pwd;
      private Set tareas = new HashSet(0);
 
     public Persona() {
     }
 
+    //Constructor add persona-login
+
+    public Persona(Integer personaId, String nombre, String apellido, String mail, Integer user, String login, String pwd) {
+        this.personaId = personaId;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.user = user;
+        this.login = login;
+        this.pwd = pwd;
+    }
+    
 	
     public Persona(String nombre, String apellido, String mail) {
         this.nombre = nombre;
@@ -86,7 +101,36 @@ public class Persona  implements java.io.Serializable {
     public void setMail(String mail) {
         this.mail = mail;
     }
+    
+    @Column(name = "user", nullable = false,length = 4)
+    public Integer getUser() {
+        return user;
+    }
+    
+    public void setUser(Integer user) {
+        this.user = user;
+    }
+    
+    @Column(name = "login", nullable = true,length = 25)
+    public String getLogin() {
+        return login;
+    }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    
+    @Column(name = "pwd",nullable = true, length = 256)
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    
+    
 @OneToMany(fetch=FetchType.LAZY, mappedBy="persona")
     public Set getTareas() {
         return this.tareas;

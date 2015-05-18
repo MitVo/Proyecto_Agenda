@@ -17,6 +17,15 @@
         <property name="mail" type="string">
             <column name="mail" length="45" not-null="true" />
         </property>
+        <property name="user" type="java.lang.Integer">
+            <column name="user" length="4" not-null="true" />
+        </property>
+        <property name="login" type="string">
+            <column name="login" length="25" not-null="false" />
+        </property>
+        <property name="pwd" type="string">
+            <column name="pwd" length="256" not-null="false" />
+        </property>
         <set name="tareas" table="tarea" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="persona_id" not-null="true" />

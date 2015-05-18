@@ -42,9 +42,12 @@
                                 <p:menuitem value="Delete" actionListener="#{menuView.delete}" icon="ui-icon-close" update="messages" ajax="false"/>
                             </p:submenu>
                         </p:submenu>
-
-                        
-
+                        <p:menuitem value="Cerrar sesión" action="#{sessionBean.cerrarSesion()}">
+                            <h:outputLabel value="#{session.maxInactiveInterval}"/>
+                            <br></br>
+                            <h:outputLabel value="#{session.lastAccessedTime}"/>
+                        </p:menuitem>
+                        <p:menuitem value="Cerrar sesión" action="#{sessionBean.cerrarSesion()}"></p:menuitem>
                     </p:menubar>
                 </h:form>
             </ui:insert>
